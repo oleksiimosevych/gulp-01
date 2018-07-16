@@ -33,22 +33,25 @@ gulp.task('browser-sync', function(){
 		return gulp.src('app/sass/**/*.sass')//usi sass faily z papki sass
 		//return gulp.src(['!app/sass/main.sass', 'app/sass/**/*.sass'])//usi krim odnoho sho po4 na !
 		//return gulp.src('app/sass/*.+(sass|scss)')//usi scss faily i sass faily
-
-
-
 		.pipe(sass())
 		//dest bez gulp na pyshetsa. dest tiki papki,
 		.pipe(gulp.dest('app/css'))
+		//injektym styli
+		.pipe(browserSync.reload({stream:true}))
+		//zapustiti browssunc
 	});
+//5)
+
 	//>>> gulp sass - zapuskaje tasku sass i kompiliuje css z sass faila
-	gulp.task('watch', function () {
+	//the stuff inside [] is executed first of all befare watch f.e
+	gulp.task('watch', ['browser-sync', 'sass'], function () {
 		// body...
 		//tak jak w src po shablonu vybr faily
 
 		//4erez komu masiv taskiv jaki my budem vykonuvaty
 		gulp.watch('app/sass/**/*.sass', ['sass']);
 	});
-
+//>>>gulp watch 
 
 
 	/*
